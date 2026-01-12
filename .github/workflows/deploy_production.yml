@@ -133,7 +133,7 @@ jobs:
                 "notebook_path": "/anime/scripts/main/Preparacion_Ambiente",
                 "source": "WORKSPACE",
                 "base_parameters": {
-                  "storageLocation": "storage"
+                  "storageName": "adlssmartdata1910"
                 }
               },
               "existing_cluster_id": "$CLUSTER_ID",
@@ -147,9 +147,9 @@ jobs:
                 "notebook_path": "/anime/scripts/main/Ingesta_data_anime",
                 "source": "WORKSPACE",
                 "base_parameters": {
-                  "inputPath": "/data/input",
-                  "outputPath": "/data/output",
-                  "processDate": "$(date +%Y-%m-%d)"
+                  "container": "raw",
+                  "esquema": "bronze",
+                  "catalogo": "catalog_anime"
                 }
               },
               "existing_cluster_id": "$CLUSTER_ID",
