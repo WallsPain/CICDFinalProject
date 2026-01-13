@@ -148,8 +148,7 @@ jobs:
                 "source": "WORKSPACE",
                 "base_parameters": {
                   "container": "raw",
-                  "esquema": "bronze",
-                  "catalogo": "catalog_anime"
+                  "esquema": "bronze"
                 }
               },
               "existing_cluster_id": "$CLUSTER_ID",
@@ -169,8 +168,7 @@ jobs:
                 "source": "WORKSPACE",
                 "base_parameters": {
                   "container": "raw",
-                  "esquema": "bronze",
-                  "catalogo": "catalog_anime"
+                  "esquema": "bronze"
                 }
               },
               "existing_cluster_id": "$CLUSTER_ID",
@@ -190,8 +188,7 @@ jobs:
                 "source": "WORKSPACE",
                 "base_parameters": {
                   "container": "raw",
-                  "esquema": "bronze",
-                  "catalogo": "catalog_anime"
+                  "esquema": "bronze"
                 }
               },
               "existing_cluster_id": "$CLUSTER_ID",
