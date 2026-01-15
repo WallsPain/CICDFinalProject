@@ -247,7 +247,7 @@ jobs:
               ]
             },
             {
-              "task_key": "Grants",
+              "task_key": "Grant",
               "description": "Ejecuta notebook Grants con parámetros",
               "notebook_task": {
                 "notebook_path": "/anime/scripts/main/Grants",
