@@ -228,7 +228,7 @@ jobs:
             },
             {
               "task_key": "Load",
-              "description": "Ejecuta notebook Ingesta_data_anime con parámetros",
+              "description": "Ejecuta notebook Load con parámetros",
               "notebook_task": {
                 "notebook_path": "/anime/scripts/main/Load",
                 "source": "WORKSPACE",
@@ -242,7 +242,7 @@ jobs:
               "max_retries": 2,
               "depends_on": [
                 {
-                  "task_key": "Load"
+                  "task_key": "Transform"
                 }
               ]
             }
