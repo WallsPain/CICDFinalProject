@@ -47,4 +47,11 @@ profiles_final_df = profile_selected_df.withColumn("ingestion_date", current_tim
 
 # COMMAND ----------
 
-profiles_final_df.write.mode("overwrite").saveAsTable(f"{catalogo}.{esquema}.profiles")
+profiles_final_df.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option(
+        "path",
+        f"abfss://{esquema}@{storage_name}.dfs.core.windows.net/profiles"
+    ) \
+    .saveAsTable(f"{catalogo}.{esquema}.profiles")

@@ -9,12 +9,14 @@ from pyspark.sql.types import MapType, StringType
 
 # COMMAND ----------
 
+dbutils.widgets.text("storage_name", "adlssmartdata1910")
 dbutils.widgets.text("catalogo", "catalog_anime")
 dbutils.widgets.text("esquema_source", "bronze")
 dbutils.widgets.text("esquema_sink", "silver")
 
 # COMMAND ----------
 
+storage_name = dbutils.widgets.get("storage_name")
 catalogo = dbutils.widgets.get("catalogo")
 esquema_source = dbutils.widgets.get("esquema_source")
 esquema_sink = dbutils.widgets.get("esquema_sink")
@@ -253,8 +255,55 @@ df_user_favorites = (
 
 # COMMAND ----------
 
-df_anime_transformed.write.mode("overwrite").saveAsTable(f"{catalogo}.{esquema_sink}.animes_transformed")
-df_profile_transformed.write.mode("overwrite").saveAsTable(f"{catalogo}.{esquema_sink}.profiles_transformed")
-df_review_transformed.write.mode("overwrite").saveAsTable(f"{catalogo}.{esquema_sink}.reviews_transformed")
-df_anime_genres.write.mode("overwrite").saveAsTable(f"{catalogo}.{esquema_sink}.animes_genres")
-df_user_favorites.write.mode("overwrite").saveAsTable(f"{catalogo}.{esquema_sink}.animes_favorites_users")
+df_anime_transformed.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option(
+        "path",
+        f"abfss://{esquema_sink}@{storage_name}.dfs.core.windows.net/animes_transformed"
+    ) \
+    .saveAsTable(f"{catalogo}.{esquema_sink}.animes_transformed")
+
+# COMMAND ----------
+
+df_profile_transformed.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option(
+        "path",
+        f"abfss://{esquema_sink}@{storage_name}.dfs.core.windows.net/profiles_transformed"
+    ) \
+    .saveAsTable(f"{catalogo}.{esquema_sink}.profiles_transformed")
+
+# COMMAND ----------
+
+df_review_transformed.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option(
+        "path",
+        f"abfss://{esquema_sink}@{storage_name}.dfs.core.windows.net/reviews_transformed"
+    ) \
+    .saveAsTable(f"{catalogo}.{esquema_sink}.reviews_transformed")
+
+# COMMAND ----------
+
+df_anime_genres.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option(
+        "path",
+        f"abfss://{esquema_sink}@{storage_name}.dfs.core.windows.net/animes_genres"
+    ) \
+    .saveAsTable(f"{catalogo}.{esquema_sink}.animes_genres")
+
+# COMMAND ----------
+
+df_user_favorites.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option(
+        "path",
+        f"abfss://{esquema_sink}@{storage_name}.dfs.core.windows.net/animes_favorites_users"
+    ) \
+    .saveAsTable(f"{catalogo}.{esquema_sink}.animes_favorites_users")

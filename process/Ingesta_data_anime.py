@@ -67,4 +67,11 @@ anime_final_df = anime_renamed_df.withColumn("ingestion_date", current_timestamp
 
 # COMMAND ----------
 
-anime_final_df.write.mode("overwrite").saveAsTable(f"{catalogo}.{esquema}.animes")
+anime_final_df.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option(
+        "path",
+        f"abfss://{esquema}@{storage_name}.dfs.core.windows.net/animes"
+    ) \
+    .saveAsTable(f"{catalogo}.{esquema}.animes")

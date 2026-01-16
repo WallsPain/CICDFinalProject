@@ -60,4 +60,11 @@ reviews_final_df = reviews_renamed_df.withColumn("ingestion_date", current_times
 
 # COMMAND ----------
 
-reviews_final_df.write.mode("overwrite").saveAsTable(f"{catalogo}.{esquema}.reviews")
+reviews_final_df.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option(
+        "path",
+        f"abfss://{esquema}@{storage_name}.dfs.core.windows.net/reviews"
+    ) \
+    .saveAsTable(f"{catalogo}.{esquema}.reviews")

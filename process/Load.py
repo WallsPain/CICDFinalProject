@@ -9,12 +9,14 @@ from pyspark.sql import functions as F
 
 # COMMAND ----------
 
+dbutils.widgets.text("storage_name", "adlssmartdata1910")
 dbutils.widgets.text("catalogo", "catalog_anime")
 dbutils.widgets.text("esquema_source", "silver")
 dbutils.widgets.text("esquema_sink", "golden")
 
 # COMMAND ----------
 
+storage_name = dbutils.widgets.get("storage_name")
 catalogo = dbutils.widgets.get("catalogo")
 esquema_source = dbutils.widgets.get("esquema_source")
 esquema_sink = dbutils.widgets.get("esquema_sink")
@@ -94,6 +96,33 @@ df_user_engagement = (
 
 # COMMAND ----------
 
-df_anime_kpis.write.mode("overwrite").saveAsTable(f"{catalogo}.{esquema_sink}.anime_kpis")
-df_genre_trends.write.mode("overwrite").saveAsTable(f"{catalogo}.{esquema_sink}.genre_trends")
-df_user_engagement.write.mode("overwrite").saveAsTable(f"{catalogo}.{esquema_sink}.user_engagement")
+df_anime_kpis.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option(
+        "path",
+        f"abfss://{esquema_sink}@{storage_name}.dfs.core.windows.net/anime_kpis"
+    ) \
+    .saveAsTable(f"{catalogo}.{esquema_sink}.anime_kpis")
+
+# COMMAND ----------
+
+df_genre_trends.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option(
+        "path",
+        f"abfss://{esquema_sink}@{storage_name}.dfs.core.windows.net/genre_trends"
+    ) \
+    .saveAsTable(f"{catalogo}.{esquema_sink}.genre_trends")
+
+# COMMAND ----------
+
+df_user_engagement.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option(
+        "path",
+        f"abfss://{esquema_sink}@{storage_name}.dfs.core.windows.net/user_engagement"
+    ) \
+    .saveAsTable(f"{catalogo}.{esquema_sink}.user_engagement")
