@@ -18,7 +18,7 @@ jobs:
         ORIGIN_HOST=${{ secrets.DATABRICKS_ORIGIN_HOST }}
         ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}
         NOTEBOOK_BASE="/Workspace/Users/juandaniel.v.r.1910@outlook.es/ETL_FinalProject"
-        NOTEBOOKS=("Preparacion_Ambiente" "Ingesta_data_anime" "Ingesta_data_review" "Ingesta_data_profile" "Transform" "Load" "Grants" "Revoke")  # Agrega más según necesites
+        NOTEBOOKS=("Preparacion_Ambiente" "Ingesta_data_anime" "Ingesta_data_review" "Ingesta_data_profile" "Transform" "Load" "Grants" "Revoke")  # Agrega más notebooks según necesites
         mkdir -p notebooks_to_deploy
         for nb in "${NOTEBOOKS[@]}"; do
           echo "Exportando $nb en modo raw..."
