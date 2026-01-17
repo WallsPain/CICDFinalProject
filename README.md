@@ -197,7 +197,7 @@ Workflow: WF_Project
 ---
 
 ## 📈 Dashboards
-https://github.com/WallsPain/CIDCDFinalProject/tree/main/dashboards
+[https://github.com/WallsPain/CIDCDFinalProject/tree/main/dashboards](https://github.com/WallsPain/CICDFinalProject/tree/main/dashboards)
 
 ## 🔍 Monitoreo
 
