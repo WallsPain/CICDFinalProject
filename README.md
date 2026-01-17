@@ -53,7 +53,7 @@ El objetivo es entregar **datasets analytics-ready** para análisis de popularid
 📊 Databricks Dashboards (Visualización)
 ```
 
-![Arquitectura](architecture.png)
+![Arquitectura](Arquitectura.png)
 
 ---
 
